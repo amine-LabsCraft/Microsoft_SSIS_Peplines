@@ -1,0 +1,1741 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/12/2026 4:46:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC"
+  DTS:CreatorName="PC\amine"
+  DTS:DTSID="{185214BE-B8ED-4916-8DE2-C9BD88D77C4B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="05_MergeJoin_Regions_Employees"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{267AC719-16FB-4067-AABF-AF9A51A1DF02}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gestionnaire de connexions Excel]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{2B0C46CF-244F-4AA5-81D0-CD781B43C234}"
+      DTS:ObjectName="Gestionnaire de connexions Excel">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\SSIS_Pipelines\output\05_Regions_Employes.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tâche de flux de données"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tâche de flux de données"
+      DTS:DTSID="{F6D65F55-B337-42F6-B250-B9FEDF08A05F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tâche de flux de données"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tâche de flux de données\Destination Excel"
+              componentClassID="Microsoft.ExcelDestination"
+              contactInfo="Destination Excel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;0"
+              description="Destination Excel"
+              name="Destination Excel"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowset">Destination_Excel</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie la variable contenant le nom de l'objet de base de données utilisé pour ouvrir un ensemble de lignes."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Commande SQL à exécuter."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le mode utilisé pour accéder à la base de données."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les valeurs fournies pour les colonnes d'identité seront copiées à la destination. Si la valeur est définie à False, les valeurs des colonnes d'identité seront générées automatiquement à la destination. Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes contenant la valeur NULL auront cette valeur NULL copiée à la destination. Si la valeur est définie à False, les colonnes contenant la valeur NULL auront leurs valeurs par défaut insérées à la destination. Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Spécifie les options à utiliser avec le chargement rapide.  Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie quand les validations sont émises pendant l'insertion des données.  Une valeur égale à 0 spécifie qu'une validation sera émise à la fin de l'insertion des données.  Ne s'applique que si le chargement rapide est activé."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tâche de flux de données\Destination Excel.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gestionnaire de connexions Excel]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gestionnaire de connexions Excel]"
+                  description="Connexion OLE DB en cours d'exécution utilisée pour accéder à la base de données."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel]"
+                  errorOrTruncationOperation="Insérer"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrée de destination Excel">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].Columns[emp_name]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="emp_name"
+                      externalMetadataColumnId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].ExternalColumns[emp_name]"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[emp_name]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].ExternalColumns[reg_id]"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[reg_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].Columns[reg_name]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="reg_name"
+                      externalMetadataColumnId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].ExternalColumns[reg_name]"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[reg_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].ExternalColumns[emp_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="emp_name" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].ExternalColumns[reg_id]"
+                      dataType="wstr"
+                      length="255"
+                      name="reg_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel].ExternalColumns[reg_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="reg_name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Destination Excel.Outputs[Sortie d'erreur de destination Excel]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de destination Excel"
+                  synchronousInputId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Outputs[Sortie d'erreur de destination Excel].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\Destination Excel.Outputs[Sortie d'erreur de destination Excel].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Destination Excel.Outputs[Sortie d'erreur de destination Excel].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\Destination Excel.Outputs[Sortie d'erreur de destination Excel].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Jointure de fusion"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Jointure de fusion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Combine deux flux de données triés en un seul à l'aide de la jointure FULL, LEFT ou INNER. Nous recommandons cette transformation lorsque les flux de données peuvent être triés au niveau de leurs sources."
+              name="Jointure de fusion"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le type de jointure à effectuer."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre de colonnes dans la clé de tri."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les valeurs NULL sont traitées comme valeurs égales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indique le nombre maximal de mémoires tampons demandées par entrée avant blocage."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion]"
+                  hasSideEffects="true"
+                  name="Entrée gauche de jointure de fusion">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[emp_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="emp_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[emp_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[reg_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[ord_id]"
+                      cachedDataType="numeric"
+                      cachedName="ord_id"
+                      cachedPrecision="10"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[ord_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[ord_date]"
+                      cachedDataType="dbDate"
+                      cachedName="ord_date"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[ord_date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion]"
+                  hasSideEffects="true"
+                  name="Entrée droite de jointure de fusion">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[emp_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="emp_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri].Columns[emp_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[emp_name]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="emp_name"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri].Columns[emp_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion]"
+                  isSorted="true"
+                  name="Sortie de jointure de fusion">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[reg_id]"
+                      name="reg_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[reg_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[emp_name]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[emp_name]"
+                      name="emp_name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[emp_name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ord_id]"
+                      dataType="numeric"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ord_id]"
+                      name="ord_id"
+                      precision="10">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[ord_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ord_date]"
+                      dataType="dbDate"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[ord_date]"
+                      name="ord_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion].Columns[ord_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[emp_id (1)]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[emp_id (1)]"
+                      name="emp_id (1)"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion].Columns[emp_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Jointure de fusion 1"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Jointure de fusion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Combine deux flux de données triés en un seul à l'aide de la jointure FULL, LEFT ou INNER. Nous recommandons cette transformation lorsque les flux de données peuvent être triés au niveau de leurs sources."
+              name="Jointure de fusion 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le type de jointure à effectuer."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre de colonnes dans la clé de tri."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les valeurs NULL sont traitées comme valeurs égales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indique le nombre maximal de mémoires tampons demandées par entrée avant blocage."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée gauche de jointure de fusion]"
+                  hasSideEffects="true"
+                  name="Entrée gauche de jointure de fusion">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée gauche de jointure de fusion].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri].Columns[reg_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée gauche de jointure de fusion].Columns[emp_name]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="emp_name"
+                      lineageId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri].Columns[emp_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée droite de jointure de fusion]"
+                  hasSideEffects="true"
+                  name="Entrée droite de jointure de fusion">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée droite de jointure de fusion].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri].Columns[reg_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée droite de jointure de fusion].Columns[reg_name]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="reg_name"
+                      lineageId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri].Columns[reg_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion]"
+                  isSorted="true"
+                  name="Sortie de jointure de fusion">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[emp_name]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[emp_name]"
+                      name="emp_name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée gauche de jointure de fusion].Columns[emp_name]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[reg_id]"
+                      name="reg_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée gauche de jointure de fusion].Columns[reg_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[reg_name]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion].Columns[reg_name]"
+                      name="reg_name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Colonne d'entrée associée à cette colonne de sortie"
+                          name="InputColumnID">#{Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée droite de jointure de fusion].Columns[reg_name]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Sort Commande emp_id"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+              name="Sort Commande emp_id"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Sort Commande emp_id.Inputs[Entrée de tri]"
+                  name="Entrée de tri">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Inputs[Entrée de tri].Columns[ord_id]"
+                      cachedDataType="numeric"
+                      cachedName="ord_id"
+                      cachedPrecision="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Inputs[Entrée de tri].Columns[emp_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="emp_id"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[emp_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Inputs[Entrée de tri].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[reg_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Inputs[Entrée de tri].Columns[ord_date]"
+                      cachedDataType="dbDate"
+                      cachedName="ord_date"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri]"
+                  isSorted="true"
+                  name="Sortie de tri">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[ord_id]"
+                      dataType="numeric"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[ord_id]"
+                      name="ord_id"
+                      precision="10">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[emp_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[emp_id]"
+                      name="emp_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[emp_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[reg_id]"
+                      name="reg_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[reg_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[ord_date]"
+                      dataType="dbDate"
+                      lineageId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri].Columns[ord_date]"
+                      name="ord_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_date]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Sort par reg_id"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+              name="Sort par reg_id"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Sort par reg_id.Inputs[Entrée de tri]"
+                  name="Entrée de tri">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort par reg_id.Inputs[Entrée de tri].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[reg_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort par reg_id.Inputs[Entrée de tri].Columns[emp_name]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="emp_name"
+                      lineageId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[emp_name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri]"
+                  isSorted="true"
+                  name="Sortie de tri">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri].Columns[reg_id]"
+                      name="reg_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[reg_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri].Columns[emp_name]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri].Columns[emp_name]"
+                      name="emp_name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion].Columns[emp_name]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Sort Region reg_id"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+              name="Sort Region reg_id"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Sort Region reg_id.Inputs[Entrée de tri]"
+                  name="Entrée de tri">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Region reg_id.Inputs[Entrée de tri].Columns[reg_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="reg_id"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Region reg_id.Inputs[Entrée de tri].Columns[reg_name]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="reg_name"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri]"
+                  isSorted="true"
+                  name="Sortie de tri">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri].Columns[reg_id]"
+                      name="reg_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri].Columns[reg_name]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri].Columns[reg_name]"
+                      name="reg_name">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_name]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Sort Vendeur emp_id"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Trier;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Trie les données d'entrée en ordre croissant ou décroissant lorsque le tri ne peut pas être effectué à la source. Par exemple, triez les données de vente par 'id de client' avant leur enregistrement dans un fichier plat et leur diffusion dans un autre service. Remarque : nous ne recommandons pas cette transformation dans le cas de flux de données volumineux."
+              name="Sort Vendeur emp_id"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si la transformation de tri supprime les lignes comportant des valeurs de tri en double."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre maximal de threads à utiliser pour le tri."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Sort Vendeur emp_id.Inputs[Entrée de tri]"
+                  name="Entrée de tri">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Vendeur emp_id.Inputs[Entrée de tri].Columns[emp_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="emp_id"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Sort Vendeur emp_id.Inputs[Entrée de tri].Columns[emp_name]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="emp_name"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_name]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison pour les données caractères."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie l'ordre de tri de la colonne."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri]"
+                  isSorted="true"
+                  name="Sortie de tri">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri].Columns[emp_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri].Columns[emp_id]"
+                      name="emp_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri].Columns[emp_name]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri].Columns[emp_name]"
+                      name="emp_name"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'identificateur de traçabilité de la colonne d'entrée associé à cette colonne de sortie."
+                          name="SortColumnId">#{Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_name]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\SRC_GestionDB_commande"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+              description="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server."
+              name="SRC_GestionDB_commande"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Spécifie l'instruction SQL utilisée par le composant pour extraire des données."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes externes qui ne sont pas des chaînes peuvent ou non être converties implicitement en chaînes dans les colonnes de sortie."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nom de la table de base de données source."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Commande"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifier le mode de récupération des informations de colonne externe"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Connections[IDbConnection]"
+                  connectionManagerID="{16A99EE2-5407-4A55-9796-FB7780B3BB89}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[PC_SQLEXPRESS1]"
+                  description="Gestionnaire de connexions managées"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET]"
+                  name="Sortie de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_id]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[ord_id]"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_id]"
+                      name="ord_id"
+                      precision="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[emp_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[emp_id]"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[emp_id]"
+                      name="emp_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[reg_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[reg_id]"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[reg_id]"
+                      name="reg_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[ord_date]"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].Columns[ord_date]"
+                      name="ord_date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[ord_id]"
+                      dataType="numeric"
+                      name="ord_id"
+                      precision="10" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[emp_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="emp_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="reg_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET].ExternalColumns[ord_date]"
+                      dataType="dbDate"
+                      name="ord_date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ord_id]"
+                      dataType="numeric"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ord_id]"
+                      name="ord_id"
+                      precision="10" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[emp_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[emp_id]"
+                      name="emp_id" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[reg_id]"
+                      name="reg_id" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ord_date]"
+                      dataType="dbDate"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ord_date]"
+                      name="ord_date" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\SRC_GestionDB_region"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+              description="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server."
+              name="SRC_GestionDB_region"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Spécifie l'instruction SQL utilisée par le composant pour extraire des données."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes externes qui ne sont pas des chaînes peuvent ou non être converties implicitement en chaînes dans les colonnes de sortie."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nom de la table de base de données source."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Region"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifier le mode de récupération des informations de colonne externe"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_region.Connections[IDbConnection]"
+                  connectionManagerID="{16A99EE2-5407-4A55-9796-FB7780B3BB89}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[PC_SQLEXPRESS1]"
+                  description="Gestionnaire de connexions managées"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET]"
+                  name="Sortie de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].ExternalColumns[reg_id]"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_id]"
+                      name="reg_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].ExternalColumns[reg_name]"
+                      length="20"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].Columns[reg_name]"
+                      name="reg_name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].ExternalColumns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="reg_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET].ExternalColumns[reg_name]"
+                      dataType="wstr"
+                      length="20"
+                      name="reg_name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[reg_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[reg_id]"
+                      name="reg_id" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[reg_name]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[reg_name]"
+                      name="reg_name" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+              description="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server."
+              name="SRC_GestionDB_Vendeur"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Spécifie l'instruction SQL utilisée par le composant pour extraire des données."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes externes qui ne sont pas des chaînes peuvent ou non être converties implicitement en chaînes dans les colonnes de sortie."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nom de la table de base de données source."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Vendeur"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifier le mode de récupération des informations de colonne externe"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Connections[IDbConnection]"
+                  connectionManagerID="{16A99EE2-5407-4A55-9796-FB7780B3BB89}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[PC_SQLEXPRESS1]"
+                  description="Gestionnaire de connexions managées"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET]"
+                  name="Sortie de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].ExternalColumns[emp_id]"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_id]"
+                      name="emp_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].ExternalColumns[emp_name]"
+                      length="40"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].Columns[emp_name]"
+                      name="emp_name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].ExternalColumns[emp_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="emp_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET].ExternalColumns[emp_name]"
+                      dataType="wstr"
+                      length="40"
+                      name="emp_name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[emp_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[emp_id]"
+                      name="emp_id" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[emp_name]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[emp_name]"
+                      name="emp_name" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de jointure de fusion]"
+              endId="Package\Tâche de flux de données\Sort par reg_id.Inputs[Entrée de tri]"
+              name="Sortie de jointure de fusion"
+              startId="Package\Tâche de flux de données\Jointure de fusion.Outputs[Sortie de jointure de fusion]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de jointure de fusion1]"
+              endId="Package\Tâche de flux de données\Destination Excel.Inputs[Entrée de destination Excel]"
+              name="Sortie de jointure de fusion"
+              startId="Package\Tâche de flux de données\Jointure de fusion 1.Outputs[Sortie de jointure de fusion]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de source ADO NET]"
+              endId="Package\Tâche de flux de données\Sort Commande emp_id.Inputs[Entrée de tri]"
+              name="Sortie de source ADO NET"
+              startId="Package\Tâche de flux de données\SRC_GestionDB_commande.Outputs[Sortie de source ADO NET]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de source ADO NET1]"
+              endId="Package\Tâche de flux de données\Sort Vendeur emp_id.Inputs[Entrée de tri]"
+              name="Sortie de source ADO NET"
+              startId="Package\Tâche de flux de données\SRC_GestionDB_Vendeur.Outputs[Sortie de source ADO NET]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de source ADO NET2]"
+              endId="Package\Tâche de flux de données\Sort Region reg_id.Inputs[Entrée de tri]"
+              name="Sortie de source ADO NET"
+              startId="Package\Tâche de flux de données\SRC_GestionDB_region.Outputs[Sortie de source ADO NET]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de tri]"
+              endId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée gauche de jointure de fusion]"
+              name="Sortie de tri"
+              startId="Package\Tâche de flux de données\Sort Commande emp_id.Outputs[Sortie de tri]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de tri1]"
+              endId="Package\Tâche de flux de données\Jointure de fusion.Inputs[Entrée droite de jointure de fusion]"
+              name="Sortie de tri"
+              startId="Package\Tâche de flux de données\Sort Vendeur emp_id.Outputs[Sortie de tri]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de tri2]"
+              endId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée gauche de jointure de fusion]"
+              name="Sortie de tri"
+              startId="Package\Tâche de flux de données\Sort par reg_id.Outputs[Sortie de tri]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de tri3]"
+              endId="Package\Tâche de flux de données\Jointure de fusion 1.Inputs[Entrée droite de jointure de fusion]"
+              name="Sortie de tri"
+              startId="Package\Tâche de flux de données\Sort Region reg_id.Outputs[Sortie de tri]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
+<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
+<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
+<Objects
+  Version="8">
+  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Tâche de flux de données"
+          TopLeft="206.333322360284,138.966665738556" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tâche de flux de données">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Tâche de flux de données\SRC_GestionDB_commande"
+          TopLeft="124.166659882499,83.1999994214376" />
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Tâche de flux de données\SRC_GestionDB_region"
+          TopLeft="129.999992897114,305.066664545271" />
+        <NodeLayout
+          Size="201.6,41.6"
+          Id="Package\Tâche de flux de données\SRC_GestionDB_Vendeur"
+          TopLeft="122.499993306895,189.799998680155" />
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Tâche de flux de données\Sort Commande emp_id"
+          TopLeft="398.33331156936,85.199999529918" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de source ADO NET]"
+          TopLeft="337.766659882499,104.999999475678">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60.566651686861,0"
+              Start="0,0"
+              End="53.066651686861,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="53.066651686861,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\Tâche de flux de données\Sort Vendeur emp_id"
+          TopLeft="415.833310613202,189.733332308796" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de source ADO NET1]"
+          TopLeft="324.099993306895,210.566665494475">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="91.733317306307,0"
+              Start="0,0"
+              End="84.233317306307,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="84.233317306307,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Tâche de flux de données\Jointure de fusion"
+          TopLeft="643.333298183151,129.533332616157" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de tri]"
+          TopLeft="589.53331156936,105.999999529918">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53.7999866137907,38.733333086239"
+              Start="0,0"
+              End="46.2999866137907,38.733333086239">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="27.0844367101902,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.0844367101902,0"
+                    Point2="31.0844367101902,0"
+                    Point3="31.0844367101902,4" />
+                  <mssgle:LineSegment
+                    End="31.0844367101902,34.733333086239" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.0844367101902,34.733333086239"
+                    Point2="31.0844367101902,38.733333086239"
+                    Point3="35.0844367101902,38.733333086239" />
+                  <mssgle:LineSegment
+                    End="46.2999866137907,38.733333086239" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de tri1]"
+          TopLeft="592.633310613202,210.533332308796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.6999875699487,-54.5999996926387"
+              Start="0,0"
+              End="43.1999875699487,-54.5999996926387">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.2933261515259,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.2933261515259,0"
+                    Point2="29.2933261515259,0"
+                    Point3="29.2933261515259,-4" />
+                  <mssgle:LineSegment
+                    End="29.2933261515259,-50.5999996926387" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.2933261515259,-50.5999996926387"
+                    Point2="29.2933261515259,-54.5999996926387"
+                    Point3="33.2933261515259,-54.5999996926387" />
+                  <mssgle:LineSegment
+                    End="43.1999875699487,-54.5999996926387" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="11.5897324015259,1,35.4071875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\Tâche de flux de données\Sort par reg_id"
+          TopLeft="839.999954104425,131.266665937437" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de jointure de fusion]"
+          TopLeft="803.333298183151,151.199999276797">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.6666559212744,0"
+              Start="0,0"
+              End="29.1666559212744,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.1666559212744,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-3.12026578936282,5,35.4071875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Tâche de flux de données\Sort Region reg_id"
+          TopLeft="844.166620543436,301.133331422872" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de source ADO NET2]"
+          TopLeft="342.799992897114,323.899997984072">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="501.366627646322,0"
+              Start="0,0"
+              End="493.866627646322,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="493.866627646322,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Tâche de flux de données\Jointure de fusion 1"
+          TopLeft="1080.83327427921,192.533332272636" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de tri2]"
+          TopLeft="987.199954104425,152.066665937437">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.6333201747807,61.2666663351986"
+              Start="0,0"
+              End="86.1333201747807,61.2666663351986">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="42.8166600873903,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42.8166600873903,0"
+                    Point2="46.8166600873903,0"
+                    Point3="46.8166600873903,4" />
+                  <mssgle:LineSegment
+                    End="46.8166600873903,57.2666663351986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.8166600873903,57.2666663351986"
+                    Point2="46.8166600873903,61.2666663351986"
+                    Point3="50.8166600873903,61.2666663351986" />
+                  <mssgle:LineSegment
+                    End="86.1333201747807,61.2666663351986" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de tri3]"
+          TopLeft="926.566620543436,301.133331422872">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="238.666653735771,-66.9999991502365"
+              Start="0,0"
+              End="238.666653735771,-59.4999991502365">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-29.4999995751182" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-29.4999995751182"
+                    Point2="0,-33.4999995751182"
+                    Point3="4,-33.4999995751182" />
+                  <mssgle:LineSegment
+                    End="234.666653735771,-33.4999995751182" />
+                  <mssgle:CubicBezierSegment
+                    Point1="234.666653735771,-33.4999995751182"
+                    Point2="238.666653735771,-33.4999995751182"
+                    Point3="238.666653735771,-37.4999995751182" />
+                  <mssgle:LineSegment
+                    End="238.666653735771,-59.4999991502365" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="101.629733117885,-28.4999995751182,35.4071875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="159.2,59.2"
+          Id="Package\Tâche de flux de données\Destination Excel"
+          TopLeft="1342.70825997099,187.416665363395" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de jointure de fusion1]"
+          TopLeft="1249.63327427921,215.174998818015">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.0749856917812,0"
+              Start="0,0"
+              End="85.5749856917812,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="85.5749856917812,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="25.0838990958906,5,35.4071875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tâche de flux de données\SRC_GestionDB_commande">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tâche de flux de données\SRC_GestionDB_region">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tâche de flux de données\SRC_GestionDB_Vendeur">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tâche de flux de données\Destination Excel">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

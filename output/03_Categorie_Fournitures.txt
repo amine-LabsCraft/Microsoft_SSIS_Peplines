@@ -1,0 +1,4 @@
+prod_id,prod_name,category
+P08       ,Ramette de papier                                                                                   ,Fournitures                   
+P09       ,Boite de stylos                                                                                     ,Fournitures                   
+P10       ,Cahier grand format                                                                                 ,Fournitures                   

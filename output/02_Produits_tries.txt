@@ -1,0 +1,10 @@
+P08       ,Ramette de papier                                                                                   ,Fournitures                   
+P10       ,Cahier grand format                                                                                 ,Fournitures                   
+P09       ,Boite de stylos                                                                                     ,Fournitures                   
+P02       ,Souris sans fil                                                                                     ,Informatique                  
+P01       ,Ordinateur portable                                                                                 ,Informatique                  
+P04       ,Ecran 24 pouces                                                                                     ,Informatique                  
+P03       ,Clavier mecanique                                                                                   ,Informatique                  
+P06       ,Chaise de bureau                                                                                    ,Mobilier                      
+P05       ,Bureau en bois                                                                                      ,Mobilier                      
+P07       ,Armoire de rangement                                                                                ,Mobilier                      

@@ -1,0 +1,32 @@
+=====================================================================
+ TP2 SSIS - Textes à copier-coller dans Visual Studio
+ (évite de recopier depuis le PDF et les fautes de frappe)
+=====================================================================
+
+---------------------------------------------------------------------
+[PHASE 2 - 1] Nom du serveur (fenêtre "Gestionnaire de connexions")
+---------------------------------------------------------------------
+.\SQLEXPRESS
+
+---------------------------------------------------------------------
+[PHASE 3 - 7] Conditional Split : une ligne = une sortie
+  Nom de la sortie        Condition
+---------------------------------------------------------------------
+Informatique              TRIM(category) == "Informatique"
+Mobilier                  TRIM(category) == "Mobilier"
+Fournitures               TRIM(category) == "Fournitures"
+
+Nom de la sortie par défaut : Autres categories
+
+Rappels :
+ - TRIM est obligatoire : category est un NCHAR(30) complété par des espaces.
+ - Double signe égal (==) et guillemets doubles ("...").
+ - La comparaison respecte les majuscules : "informatique" ne marche pas.
+
+---------------------------------------------------------------------
+[FACULTATIF] Source ADO NET en mode "Commande SQL" sans espaces
+---------------------------------------------------------------------
+SELECT RTRIM(prod_id)   AS prod_id,
+       RTRIM(prod_name) AS prod_name,
+       RTRIM(category)  AS category
+FROM dbo.Produit;

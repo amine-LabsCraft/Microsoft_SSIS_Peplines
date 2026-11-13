@@ -1,0 +1,9 @@
+# Visual Studio / SSIS build output and per-user settings
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Excel lock files created while a workbook is open
+~$*.xlsx

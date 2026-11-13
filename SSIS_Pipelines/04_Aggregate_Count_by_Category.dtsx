@@ -1,0 +1,537 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/12/2026 4:31:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC"
+  DTS:CreatorName="PC\amine"
+  DTS:DTSID="{DC7C24A0-BFD0-4BD9-810E-C80109432A42}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1036"
+  DTS:ObjectName="04_Aggregate_Count_by_Category"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{3D7246BA-2AC1-4FF6-A1CF-89C6152C6501}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Nbr_Produit_par_cat]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{29FED6B6-E666-4C08-BEBA-3A92B63BC5A0}"
+      DTS:ObjectName="Nbr_Produit_par_cat">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1036"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\SSIS_Pipelines\output\04_Nb_produits_par_categorie.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="21"
+              DTS:TextQualified="True"
+              DTS:ObjectName="nb_produits"
+              DTS:DTSID="{D99D22C7-7231-4E4C-AF7B-A5A8D7FE3219}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="category"
+              DTS:DTSID="{D6CC6DC6-AD77-4779-B565-5B8ACE01E5C8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Tâche de flux de données"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tâche de flux de données"
+      DTS:DTSID="{AE3E33F0-DD66-4560-BD33-23DABAE277B7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tâche de flux de données"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tâche de flux de données\Agrégation"
+              componentClassID="Microsoft.Aggregate"
+              contactInfo="Agrégation;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;3"
+              description="Agrège des données avec des fonctions telles que Moyenne, Somme, Nombre, Max.et Min. Par exemple, regroupez des données pour calculer la somme des ventes par produit ou la moyenne des visites par jour."
+              name="Agrégation"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre approximatif de clés GROUP BY produites par l'agrégation. Basse indique 500 000 valeurs de clés, Moyenne indique 5 millions de valeurs de clés et Haute indique plus de 25 millions de valeurs de clés. Non spécifié indique qu'aucune valeur KeyScale n'est utilisée."
+                  name="KeyScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Spécifie le nombre exact de clés GROUP BY produites par l'agrégation. Si une valeur KeyScale est spécifiée, la valeur dans Keys est prioritaire."
+                  name="Keys" />
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le nombre approximatif de valeurs distinctes totalisé distinctement par l'agrégation dans une colonne. Basse indique 500 000 valeurs de clés, Moyenne indique 5 millions de valeurs de clés et Haute indique plus de 25 millions de valeurs de clés. Non spécifié indique qu'aucune valeur CountDistinctScale n'est utilisée."
+                  name="CountDistinctScale"
+                  typeConverter="KeyScaleType">0</property>
+                <property
+                  dataType="System.Null"
+                  description="Spécifie le nombre exact de valeurs distinctes totalisées distinctement par l'agrégation dans une colonne. Si une valeur CountDistinctScale est spécifiée, la valeur dans CountDistinctKeys est prioritaire."
+                  name="CountDistinctKeys" />
+                <property
+                  dataType="System.Int32"
+                  description="Spécifie le pourcentage possible d'extension de la mémoire pendant l'agrégation. Les valeurs valides vont de 1 à 100."
+                  name="AutoExtendFactor">25</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Agrégation.Inputs[Entrée d'agrégation 1]"
+                  name="Entrée d'agrégation 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Agrégation.Inputs[Entrée d'agrégation 1].Columns[prod_id]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="prod_id"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[prod_id]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Agrégation.Inputs[Entrée d'agrégation 1].Columns[category]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="category"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[category]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1]"
+                  name="Sortie d'agrégation 1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Spécifie le nombre approximatif de clés GROUP BY produites par l'agrégation. Basse indique 500 000 valeurs de clés, Moyenne indique 5 millions de valeurs de clés et Haute indique plus de 25 millions de valeurs de clés. Non spécifié indique qu'aucune valeur KeyScale n'est utilisée."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Spécifie le nombre exact de clés GROUP BY produites par l'agrégation. Si une valeur KeyScale est spécifiée, la valeur dans Keys est prioritaire."
+                      name="Keys" />
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1].Columns[nb_produits]"
+                      dataType="ui8"
+                      lineageId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1].Columns[nb_produits]"
+                      name="nb_produits">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'ID de la colonne d'entrée utilisé dans l'agrégation."
+                          name="AggregationColumnId">#{Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[prod_id]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie le type d'agrégation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indique si la colonne nécessite un traitement spécial, au cas où elle contiendrait des données dépassant la taille limite ou nécessiterait une précision au-delà du type de données float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison de chaînes."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1].Columns[category]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1].Columns[category]"
+                      name="category">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Spécifie l'ID de la colonne d'entrée utilisé dans l'agrégation."
+                          name="AggregationColumnId">#{Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[category]}</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie le type d'agrégation."
+                          name="AggregationType"
+                          typeConverter="AggregationType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Indique si la colonne nécessite un traitement spécial, au cas où elle contiendrait des données dépassant la taille limite ou nécessiterait une précision au-delà du type de données float."
+                          name="IsBig">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Spécifie les options de comparaison de chaînes."
+                          name="AggregationComparisonFlags">0</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\Destination de fichier plat"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Destination de fichier plat;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;1"
+              description="Destination de fichier plat"
+              localeId="1036"
+              name="Destination de fichier plat"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Spécifie si les données remplaceront ou seront ajoutées au fichier de destination."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Spécifie le texte à enregistrer sur le fichier de destination avant d'enregistrer des données."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="Quand le qualificateur de texte est activé, spécifie si le qualificateur de texte dans les données écrites dans le fichier de destination va être échappé ou non."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tâche de flux de données\Destination de fichier plat.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Nbr_Produit_par_cat]"
+                  connectionManagerRefId="Package.ConnectionManagers[Nbr_Produit_par_cat]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat]"
+                  hasSideEffects="true"
+                  name="Entrée de destination de fichier plat">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat].Columns[nb_produits]"
+                      cachedDataType="ui8"
+                      cachedName="nb_produits"
+                      externalMetadataColumnId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat].ExternalColumns[nb_produits]"
+                      lineageId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1].Columns[nb_produits]" />
+                    <inputColumn
+                      refId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat].Columns[category]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="category"
+                      externalMetadataColumnId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat].ExternalColumns[category]"
+                      lineageId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1].Columns[category]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat].ExternalColumns[nb_produits]"
+                      dataType="ui8"
+                      name="nb_produits" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="30"
+                      name="category" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Tâche de flux de données\P4_Agregat"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Tous droits réservés; http://www.microsoft.com/sql/support;4"
+              description="Utilise des données issues de SQL Server, OLE DB, ODBC ou Oracle, à l'aide du fournisseur de données .NET Framework correspondant. Utilisez une instruction Transact-SQL pour définir le jeu de résultats. Par exemple, extrayez des données depuis SQL Server à partir du fournisseur de données .NET Framework pour SQL Server."
+              name="P4_Agregat"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Spécifie l'instruction SQL utilisée par le composant pour extraire des données."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Nombre de secondes avant l'expiration d'une commande.  Une valeur égale à 0 indique un délai d'expiration infini."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indique si les colonnes externes qui ne sont pas des chaînes peuvent ou non être converties implicitement en chaînes dans les colonnes de sortie."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nom de la table de base de données source."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Produit"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Spécifier le mode de récupération des informations de colonne externe"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tâche de flux de données\P4_Agregat.Connections[IDbConnection]"
+                  connectionManagerID="{16A99EE2-5407-4A55-9796-FB7780B3BB89}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[PC_SQLEXPRESS1]"
+                  description="Gestionnaire de connexions managées"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET]"
+                  name="Sortie de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[prod_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].ExternalColumns[prod_id]"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[prod_id]"
+                      name="prod_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[prod_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].ExternalColumns[prod_name]"
+                      length="100"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[prod_name]"
+                      name="prod_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].ExternalColumns[category]"
+                      length="30"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].Columns[category]"
+                      name="category"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].ExternalColumns[prod_id]"
+                      dataType="wstr"
+                      length="10"
+                      name="prod_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].ExternalColumns[prod_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="prod_name" />
+                    <externalMetadataColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="30"
+                      name="category" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET]"
+                  isErrorOut="true"
+                  name="Sortie d'erreur de source ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[prod_id]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[prod_id]"
+                      name="prod_id" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[prod_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[prod_name]"
+                      name="prod_name" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[category]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[category]"
+                      name="category" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie d'erreur de source ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie d'agrégation 1]"
+              endId="Package\Tâche de flux de données\Destination de fichier plat.Inputs[Entrée de destination de fichier plat]"
+              name="Sortie d'agrégation 1"
+              startId="Package\Tâche de flux de données\Agrégation.Outputs[Sortie d'agrégation 1]" />
+            <path
+              refId="Package\Tâche de flux de données.Paths[Sortie de source ADO NET]"
+              endId="Package\Tâche de flux de données\Agrégation.Inputs[Entrée d'agrégation 1]"
+              name="Sortie de source ADO NET"
+              startId="Package\Tâche de flux de données\P4_Agregat.Outputs[Sortie de source ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Cette section CDATA contient des informations sur la disposition du package. Elle comprend des informations telles que les coordonnées (x,y), la largeur et la hauteur.-->
+<!--Si vous modifiez manuellement cette section et commettez une erreur, vous pouvez la supprimer. -->
+<!--Le package pourra toujours se charger normalement, mais les informations de disposition précédente seront perdues et le concepteur réorganisera automatiquement les éléments sur l'aire de conception.-->
+<Objects
+  Version="8">
+  <!--Chaque nœud ci-dessous contiendra des propriétés qui n'affectent pas le comportement d'exécution.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="197.6,41.6"
+          Id="Package\Tâche de flux de données"
+          TopLeft="201.333322633472,107.766665955517" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tâche de flux de données">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="133.6,41.6"
+          Id="Package\Tâche de flux de données\P4_Agregat"
+          TopLeft="250.499986613791,142.433332381116" />
+        <NodeLayout
+          Size="128.8,41.6"
+          Id="Package\Tâche de flux de données\Agrégation"
+          TopLeft="479.999973773957,162.066665539675" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie de source ADO NET]"
+          TopLeft="384.099986613791,163.233332381116">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="95.8999871601667,19.6333331585593"
+              Start="0,0"
+              End="88.3999871601667,19.6333331585593">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="43.9499935800833,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43.9499935800833,0"
+                    Point2="47.9499935800833,0"
+                    Point3="47.9499935800833,4" />
+                  <mssgle:LineSegment
+                    End="47.9499935800833,15.6333331585593" />
+                  <mssgle:CubicBezierSegment
+                    Point1="47.9499935800833,15.6333331585593"
+                    Point2="47.9499935800833,19.6333331585593"
+                    Point3="51.9499935800833,19.6333331585593" />
+                  <mssgle:LineSegment
+                    End="88.3999871601667,19.6333331585593" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\Tâche de flux de données\Destination de fichier plat"
+          TopLeft="804.166622728939,178.533332091835" />
+        <EdgeLayout
+          Id="Package\Tâche de flux de données.Paths[Sortie d'agrégation 1]"
+          TopLeft="608.799973773957,182.866665539675">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="195.366648954982,16.4666665521596"
+              Start="0,0"
+              End="187.866648954982,16.4666665521596">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="93.6833244774909,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="93.6833244774909,0"
+                    Point2="97.6833244774909,0"
+                    Point3="97.6833244774909,4" />
+                  <mssgle:LineSegment
+                    End="97.6833244774909,12.4666665521596" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97.6833244774909,12.4666665521596"
+                    Point2="97.6833244774909,16.4666665521596"
+                    Point3="101.683324477491,16.4666665521596" />
+                  <mssgle:LineSegment
+                    End="187.866648954982,16.4666665521596" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tâche de flux de données\P4_Agregat">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

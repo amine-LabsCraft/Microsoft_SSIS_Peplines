@@ -1,0 +1,4 @@
+prod_id,prod_name,category
+P05       ,Bureau en bois                                                                                      ,Mobilier                      
+P06       ,Chaise de bureau                                                                                    ,Mobilier                      
+P07       ,Armoire de rangement                                                                                ,Mobilier                      
